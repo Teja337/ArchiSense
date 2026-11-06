@@ -79,6 +79,7 @@ AsTdEA requires software-version information and architectural analysis data to 
 | `locShared.csv` | Stores shared LOC information in the new input structure. |
 | `versions.csv` | Optionally provides version identifiers and ordering information. |
 | `SharedClasses.csv` | Optionally identifies shared classes between versions. |
+| `LocPerClass.csv` | Provides per-class lines-of-code information required by the new input structure. |
 | Component change CSV files | Provide class-level or package-level change information. |
 
 ### 3.2 Input Processing Classes
@@ -161,6 +162,7 @@ AsTdEA calculates information about smell evolution, including:
 - Merge and split events.
 - Transitions between versions.
 - Component changes affecting architectural smells.
+The project-level tracking process is implemented through three specialized classes: `CdProjectTracker`, `HdProjectTracker`, and `UdProjectTracker`. Each class creates its corresponding version-pair tracker to compare architectural smells between consecutive software versions. The mapping classes store relationships between smell instances, while `InterVersionCdBuilder` constructs cyclic-dependency evolution families. This process supports the identification of continuing, changing, merging, splitting, and disappearing architectural smells.
 
 ### 4.5 Observation
 
@@ -351,6 +353,20 @@ The following areas require additional testing:
 - Parallel execution behaviour.
 - CSV output consistency and reproducibility.
 
+### 8.6 Additional Source-Code Observations
+
+The detailed source-code inspection identified several implementation concerns that require further investigation:
+
+1. **Smell Initialization:** `VersionSmellsInitialiser` pairs component and property CSV records by row position. It assumes that both files contain corresponding records in the same order.
+2. **Evolution Matching:** The linear evolution tracker uses similarity-based candidate ordering. Equal comparison values may cause distinct candidates to be treated as equivalent.
+3. **Inter-Version IDs:** `InterVersionSmellIdManager` uses a static ID counter that is not reset between projects.
+4. **Collection Management:** Several classes expose internal mutable collections through getters.
+5. **Output Ordering:** Some reports are generated from sets, which may result in different row ordering across executions.
+6. **CD Evolution Metrics:** The denominator used for the weighted simple-split share calculation requires verification against the intended metric definition.
+7. **Resource Management:** Some CSV processing operations could use more consistent resource handling.
+
+These observations are potential implementation concerns, not confirmed defects. Their practical impact must be evaluated through targeted tests.
+
 ### 8.7 Observation
 
 These points are preliminary audit observations, not confirmed software defects. They will be investigated through controlled experiments before any changes are proposed for ArchiSense.
@@ -372,11 +388,13 @@ The source-code inspection provides an understanding of the original AsTdEA impl
 ### 9.2 Current Verification Status
 
 - Original Java source inventory recorded: 96 files.
+- Source-code review completed: all 96 Java source files reviewed.
 - Maven test suite: 12 tests passed.
 - Test failures and errors: 0 after preparing the test environment.
 - Original source preserved separately from the test copy.
+- Source-level implementation concerns documented for further verification.
 - Complete end-to-end application execution: Pending.
-- Potential limitations: Identified for further verification.
+- Experimental verification of potential issues: Pending.
 
 ### 9.3 Conclusion
 
