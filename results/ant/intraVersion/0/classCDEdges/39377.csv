@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.SQLExec$Transaction,org.apache.tools.ant.taskdefs.SQLExec
+org.apache.tools.ant.taskdefs.SQLExec$Transaction,0,1
+org.apache.tools.ant.taskdefs.SQLExec,1,0

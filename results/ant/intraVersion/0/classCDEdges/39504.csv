@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.Exec$StreamPumper,org.apache.tools.ant.taskdefs.Exec
+org.apache.tools.ant.taskdefs.Exec$StreamPumper,0,1
+org.apache.tools.ant.taskdefs.Exec,1,0

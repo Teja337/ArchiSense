@@ -1,0 +1,6 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.XSLTProcess,org.apache.tools.ant.taskdefs.XSLTProcess$1,org.apache.tools.ant.taskdefs.XSLTProcess$StyleMapper,org.apache.tools.ant.taskdefs.optional.TraXLiaison
+org.apache.tools.ant.taskdefs.XSLTProcess,0,1,1,1
+org.apache.tools.ant.taskdefs.XSLTProcess$1,1,0,0,0
+org.apache.tools.ant.taskdefs.XSLTProcess$StyleMapper,1,0,0,0
+org.apache.tools.ant.taskdefs.optional.TraXLiaison,1,0,0,0

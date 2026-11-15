@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.types.resources.AbstractClasspathResource,org.apache.tools.ant.types.resources.JavaResource
+org.apache.tools.ant.types.resources.AbstractClasspathResource,0,1
+org.apache.tools.ant.types.resources.JavaResource,1,0

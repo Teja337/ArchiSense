@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.Sync$MyCopy,org.apache.tools.ant.taskdefs.Sync
+org.apache.tools.ant.taskdefs.Sync$MyCopy,0,1
+org.apache.tools.ant.taskdefs.Sync,1,0

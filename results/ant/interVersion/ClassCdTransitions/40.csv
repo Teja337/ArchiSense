@@ -1,0 +1,3 @@
+sourceVersion,targetVersion,sourceIntraVersionCd,targetIntraVersionCd,transitionType,shapeSource,shapeTarget
+1,2,1.32882,2.32882,pure,multiHub,multiHub
+0,1,0.32620,1.32882,pure,multiHub,multiHub

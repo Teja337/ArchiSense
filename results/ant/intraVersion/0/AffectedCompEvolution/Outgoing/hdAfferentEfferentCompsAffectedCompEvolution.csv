@@ -1,0 +1,14 @@
+changeType,absCount,meanPerComp
+existingAndAffected,216,1.0
+existingAndNotAffected,0,0.0
+removed,0,0.0
+changed11AndAffected,0,0.0
+changed11AndNotAffected,0,0.0
+changed1NAndAllAffectedWithOriginal,0,0.0
+changed1NAndSomeAffectedWithOriginal,0,0.0
+changed1NAndOneAffectedWithOriginal,0,0.0
+changed1NAndNoneAffectedWithOriginal,0,0.0
+changed1NAndAllAffectedWithoutOriginal,0,0.0
+changed1NAndSomeAffectedWithoutOriginal,0,0.0
+changed1NAndOneAffectedWithoutOriginal,0,0.0
+changed1NAndNoneAffectedWithoutOriginal,0,0.0

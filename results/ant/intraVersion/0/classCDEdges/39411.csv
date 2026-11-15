@@ -1,0 +1,7 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.optional.javah.Gcjh,org.apache.tools.ant.taskdefs.optional.javah.Kaffeh,org.apache.tools.ant.taskdefs.optional.Javah,org.apache.tools.ant.taskdefs.optional.javah.SunJavah,org.apache.tools.ant.taskdefs.optional.javah.JavahAdapterFactory
+org.apache.tools.ant.taskdefs.optional.javah.Gcjh,0,0,1,0,0
+org.apache.tools.ant.taskdefs.optional.javah.Kaffeh,0,0,1,0,0
+org.apache.tools.ant.taskdefs.optional.Javah,0,0,0,0,1
+org.apache.tools.ant.taskdefs.optional.javah.SunJavah,0,0,1,0,0
+org.apache.tools.ant.taskdefs.optional.javah.JavahAdapterFactory,1,1,0,1,0

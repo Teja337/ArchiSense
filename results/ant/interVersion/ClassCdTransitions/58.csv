@@ -1,0 +1,3 @@
+sourceVersion,targetVersion,sourceIntraVersionCd,targetIntraVersionCd,transitionType,shapeSource,shapeTarget
+0,1,0.38371,1.36768,pure,circle,circle
+1,2,1.36768,2.36768,pure,circle,circle

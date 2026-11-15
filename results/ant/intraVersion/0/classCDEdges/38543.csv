@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.types.resources.ContentTransformingResource$1,org.apache.tools.ant.types.resources.ContentTransformingResource
+org.apache.tools.ant.types.resources.ContentTransformingResource$1,0,1
+org.apache.tools.ant.types.resources.ContentTransformingResource,1,0

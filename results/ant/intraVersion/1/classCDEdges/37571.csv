@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.Manifest$Section,org.apache.tools.ant.taskdefs.Manifest
+org.apache.tools.ant.taskdefs.Manifest$Section,0,1
+org.apache.tools.ant.taskdefs.Manifest,1,0

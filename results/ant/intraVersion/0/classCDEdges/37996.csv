@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.types.Permissions,org.apache.tools.ant.types.Permissions$MySM
+org.apache.tools.ant.types.Permissions,0,1
+org.apache.tools.ant.types.Permissions$MySM,1,0

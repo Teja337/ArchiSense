@@ -1,0 +1,7 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.Replace$FileInput,org.apache.tools.ant.taskdefs.Replace$FileOutput,org.apache.tools.ant.taskdefs.Replace,org.apache.tools.ant.taskdefs.Replace$Replacefilter,org.apache.tools.ant.taskdefs.Replace$NestedString
+org.apache.tools.ant.taskdefs.Replace$FileInput,0,0,1,0,0
+org.apache.tools.ant.taskdefs.Replace$FileOutput,0,0,1,0,0
+org.apache.tools.ant.taskdefs.Replace,1,1,0,1,1
+org.apache.tools.ant.taskdefs.Replace$Replacefilter,0,0,1,0,1
+org.apache.tools.ant.taskdefs.Replace$NestedString,0,0,1,0,0

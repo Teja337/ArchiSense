@@ -1,0 +1,77 @@
+id,parentId,cumulatedDuration,eventCount,eventDescription
+0,-1,266,1,Class and package from binary files reading
+1,-1,671,1,Class and package dependency graph creation
+2,-1,224,1,Class metrics calculation
+3,-1,47,1,Package metrics calculation
+5,-1,27,1,Unstable dependency detection
+6,-1,16,1,Hub-like dependency detection
+7,-1,255,1,Cycle detection
+8,-1,74,1,Technical debt and overlap ratio calculation
+9,-1,33,1,Misc metrics calculation
+10,-1,181,1,Arcan Printing
+17,1,13,1223,GraphBuilder node searching
+18,1,8,1223,GraphBuilder super dependency checking and creating
+19,1,7,1223,GraphBuilder interface dependency checking and creating
+20,1,481,1223,GraphBuilder method dependency checking and creating
+21,1,8,1223,GraphBuilder package dependency checking and creating
+22,1,143,1,GraphBuilder afferent coupling calculation
+23,20,16,52629,GraphBuilder method dependency: Class name parsing
+24,20,21,52629,GraphBuilder method dependency: Node to graph adding
+25,20,78,52629,GraphBuilder method dependency: Edge updating
+26,20,50,52629,GraphBuilder method dependency: Coupling updating
+27,20,69,1223,GraphBuilder method dependency: Dependency initializing
+28,20,195,10990,GraphBuilder method dependency: Method generating
+29,20,25,10990,GraphBuilder method dependency: Instruction processing
+30,20,5,10990,GraphBuilder method dependency: Annotation processing
+31,10,3,1,Project metrics printing
+32,10,9,1,Class-level cyclic-dependency properties printing
+33,10,3,1,Class-level cyclic-dependency components printing
+34,10,100,1,Class-level cyclic-dependency edges printing
+35,10,4,1,Class-level cyclic-dependency minimum feedback edge set printing
+36,10,0,1,Package-level cyclic-dependency properties printing
+37,10,0,1,Package-level cyclic-dependency components printing
+38,10,3,1,Package-level cyclic-dependency edges printing
+39,10,1,1,Package-level cyclic-dependency minimum feedback edge set printing
+40,10,1,1,Hub-like dependency properties printing
+41,10,2,1,Hub-like dependency components printing
+42,10,1,1,Unstable dependency properties printing
+43,10,1,1,Unstable dependency components printing
+44,7,32,1,Class-level supercycle detection
+45,7,0,1,Package-level supercycle detection
+46,7,161,55,Class-level supercycle shape assignment
+47,7,0,2,Package-level supercycle shape assignment
+48,7,24,55,Class-level subcycle detection
+49,7,0,2,Package-level subcycle detection
+50,7,34,55,Class-level supercycle MFES calculation
+51,7,0,2,Package-level subcycle MFES calculation
+52,46,0,55,Class-level supercycle shape classification: Backref calculation
+53,46,0,6,Class-level supercycle shape classification: Chain determination
+54,46,0,5,Class-level supercycle shape classification: Star determination
+56,46,148,7,Class-level supercycle shape classification: Hub determination (Betweenness centrality calculation)
+57,46,11,7,Class-level supercycle shape classification: Hub determination (Gini calculation)
+58,47,0,2,Package-level supercycle shape classification: Backref calculation
+59,47,0,1,Package-level supercycle shape classification: Chain determination
+60,47,0,1,Package-level supercycle shape classification: Star determination
+64,8,1,1,Architecture-smell affected component counting
+65,8,0,1,Overlap determination
+66,8,69,1,PageRank calculation
+67,8,4,1,Technical debt calculation
+68,9,0,1,Architecture-smell count update
+69,9,7,1,Hub-like dependency metrics calculation
+70,9,25,1,Unstable dependency metrics calculation
+71,9,0,1,Weak/strong package-level cyclic dependency determination
+72,9,0,1,Project metric aggregates calculation
+73,0,13,1,Binary file reading: Jar walking
+74,0,12,22,Binary file reading: Bytes reading
+75,0,3,22,Binary file reading: Input streams initializing
+76,0,7,1411,Binary file reading: Jar entry getting
+77,0,93,1223,Binary file reading: Output streams initializing
+78,0,132,1223,Binary file reading: Class parsing
+79,0,1,1223,Binary file reading: To repo adding
+80,0,2,1223,Binary file reading: To lists adding
+81,56,0,7,Betweeness centrality class-level: Vertex initializing
+82,56,0,241,Betweeness centrality simple explore class-level: Queue initializing
+83,56,12,241,Betweeness centrality simple explore class-level: Vertex setup
+84,56,14,35911,Betweeness centrality simple explore class-level: Queue processing
+85,56,62,35911,Betweeness centrality simple explore class-level: edge processing
+86,56,51,241,Betweeness centrality class-level: Queue emptying

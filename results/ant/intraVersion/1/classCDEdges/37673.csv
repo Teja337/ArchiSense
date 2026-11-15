@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.AntStructure,org.apache.tools.ant.taskdefs.AntStructure$DTDPrinter
+org.apache.tools.ant.taskdefs.AntStructure,0,1
+org.apache.tools.ant.taskdefs.AntStructure$DTDPrinter,1,0

@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.Checksum$1,org.apache.tools.ant.taskdefs.Checksum
+org.apache.tools.ant.taskdefs.Checksum$1,0,1
+org.apache.tools.ant.taskdefs.Checksum,1,0

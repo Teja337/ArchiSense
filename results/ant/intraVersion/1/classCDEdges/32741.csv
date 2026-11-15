@@ -1,0 +1,8 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.zip.UnsupportedZipFeatureException,org.apache.tools.zip.ZipUtil,org.apache.tools.zip.ZipEntry,org.apache.tools.zip.UnparseableExtraFieldData,org.apache.tools.zip.ExtraFieldUtils,org.apache.tools.zip.UnrecognizedExtraField
+org.apache.tools.zip.UnsupportedZipFeatureException,0,0,1,0,0,0
+org.apache.tools.zip.ZipUtil,1,0,1,0,0,0
+org.apache.tools.zip.ZipEntry,0,0,0,1,1,0
+org.apache.tools.zip.UnparseableExtraFieldData,0,1,0,0,0,0
+org.apache.tools.zip.ExtraFieldUtils,0,0,0,1,0,1
+org.apache.tools.zip.UnrecognizedExtraField,0,1,0,0,0,0

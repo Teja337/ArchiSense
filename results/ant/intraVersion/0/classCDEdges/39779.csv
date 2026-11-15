@@ -1,0 +1,5 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.optional.junit.JUnitTask$JunitTestThread,org.apache.tools.ant.taskdefs.optional.junit.JUnitTask$1,org.apache.tools.ant.taskdefs.optional.junit.JUnitTask
+org.apache.tools.ant.taskdefs.optional.junit.JUnitTask$JunitTestThread,0,0,1
+org.apache.tools.ant.taskdefs.optional.junit.JUnitTask$1,0,0,1
+org.apache.tools.ant.taskdefs.optional.junit.JUnitTask,1,1,0

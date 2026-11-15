@@ -1,0 +1,7 @@
+id,parentId,cumulatedDuration,eventCount,eventDescription
+11,-1,2250,1,Arcan running
+12,-1,24,1,Version initialization
+13,-1,0,1,Intra-version smell processing
+14,-1,13,1,Inter-version smell processing
+15,-1,19,1,Smell delta calculation
+16,-1,54,1,AsTdEA printing

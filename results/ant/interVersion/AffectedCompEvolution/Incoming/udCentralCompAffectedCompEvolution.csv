@@ -1,0 +1,14 @@
+changeType,absCount,meanPerVersion,meanPerVersionPerComp
+existingAndAffected,24,8.0,0.6666666666666666
+existingAndNotAffected,0,0.0,0.0
+introduced,0,0.0,0.0
+changed11AndAffected,0,0.0,0.0
+changed11AndNotAffected,0,0.0,0.0
+changedN1AndAllAffectedWithResult,0,0.0,0.0
+changedN1AndSomeAffectedWithResult,0,0.0,0.0
+changedN1AndOneAffectedWithResult,0,0.0,0.0
+changedN1AndNoneAffectedWithResult,0,0.0,0.0
+changedN1AndAllAffectedWithoutResult,0,0.0,0.0
+changedN1AndSomeAffectedWithoutResult,0,0.0,0.0
+changedN1AndOneAffectedWithoutResult,0,0.0,0.0
+changedN1AndNoneAffectedWithoutResult,0,0.0,0.0

@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.optional.junit.CustomJUnit4TestAdapterCache,org.apache.tools.ant.taskdefs.optional.junit.CustomJUnit4TestAdapterCache$1
+org.apache.tools.ant.taskdefs.optional.junit.CustomJUnit4TestAdapterCache,0,1
+org.apache.tools.ant.taskdefs.optional.junit.CustomJUnit4TestAdapterCache$1,1,0

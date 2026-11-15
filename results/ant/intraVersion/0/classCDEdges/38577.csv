@@ -1,0 +1,7 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.optional.j2ee.ServerDeploy,org.apache.tools.ant.taskdefs.optional.j2ee.JonasHotDeploymentTool,org.apache.tools.ant.taskdefs.optional.j2ee.WebLogicHotDeploymentTool,org.apache.tools.ant.taskdefs.optional.j2ee.AbstractHotDeploymentTool,org.apache.tools.ant.taskdefs.optional.j2ee.GenericHotDeploymentTool
+org.apache.tools.ant.taskdefs.optional.j2ee.ServerDeploy,0,1,1,0,1
+org.apache.tools.ant.taskdefs.optional.j2ee.JonasHotDeploymentTool,1,0,0,0,1
+org.apache.tools.ant.taskdefs.optional.j2ee.WebLogicHotDeploymentTool,1,0,0,1,0
+org.apache.tools.ant.taskdefs.optional.j2ee.AbstractHotDeploymentTool,1,0,0,0,0
+org.apache.tools.ant.taskdefs.optional.j2ee.GenericHotDeploymentTool,1,0,0,1,0

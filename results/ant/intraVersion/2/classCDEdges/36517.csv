@@ -1,0 +1,12 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.compilers.Kjc,org.apache.tools.ant.taskdefs.compilers.Gcj,org.apache.tools.ant.taskdefs.compilers.JavacExternal,org.apache.tools.ant.taskdefs.compilers.DefaultCompilerAdapter,org.apache.tools.ant.taskdefs.compilers.Jikes,org.apache.tools.ant.taskdefs.compilers.Jvc,org.apache.tools.ant.taskdefs.compilers.Javac13,org.apache.tools.ant.taskdefs.compilers.Sj,org.apache.tools.ant.taskdefs.Javac,org.apache.tools.ant.taskdefs.compilers.CompilerAdapterFactory
+org.apache.tools.ant.taskdefs.compilers.Kjc,0,0,0,1,0,0,0,0,1,0
+org.apache.tools.ant.taskdefs.compilers.Gcj,0,0,0,1,0,0,0,0,1,0
+org.apache.tools.ant.taskdefs.compilers.JavacExternal,0,0,0,1,0,0,0,0,1,0
+org.apache.tools.ant.taskdefs.compilers.DefaultCompilerAdapter,0,0,0,0,0,0,0,0,1,0
+org.apache.tools.ant.taskdefs.compilers.Jikes,0,0,0,1,0,0,0,0,1,0
+org.apache.tools.ant.taskdefs.compilers.Jvc,0,0,0,1,0,0,0,0,1,0
+org.apache.tools.ant.taskdefs.compilers.Javac13,0,0,0,1,0,0,0,0,1,0
+org.apache.tools.ant.taskdefs.compilers.Sj,0,0,0,1,0,0,0,0,1,0
+org.apache.tools.ant.taskdefs.Javac,0,0,0,0,0,0,0,0,0,1
+org.apache.tools.ant.taskdefs.compilers.CompilerAdapterFactory,1,1,1,0,1,1,1,1,0,0

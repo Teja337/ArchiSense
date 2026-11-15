@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.PropertyHelperTask$DelegateElement,org.apache.tools.ant.taskdefs.PropertyHelperTask
+org.apache.tools.ant.taskdefs.PropertyHelperTask$DelegateElement,0,1
+org.apache.tools.ant.taskdefs.PropertyHelperTask,1,0

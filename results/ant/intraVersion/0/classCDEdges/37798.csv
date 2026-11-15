@@ -1,0 +1,19 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.MethodHandleCPInfo,org.apache.tools.ant.taskdefs.optional.depend.constantpool.ConstantPool,org.apache.tools.ant.taskdefs.optional.depend.constantpool.InterfaceMethodRefCPInfo,org.apache.tools.ant.taskdefs.optional.depend.constantpool.ConstantCPInfo,org.apache.tools.ant.taskdefs.optional.depend.constantpool.ConstantPoolEntry,org.apache.tools.ant.taskdefs.optional.depend.constantpool.StringCPInfo,org.apache.tools.ant.taskdefs.optional.depend.constantpool.NameAndTypeCPInfo,org.apache.tools.ant.taskdefs.optional.depend.constantpool.LongCPInfo,org.apache.tools.ant.taskdefs.optional.depend.constantpool.MethodTypeCPInfo,org.apache.tools.ant.taskdefs.optional.depend.constantpool.FieldRefCPInfo,org.apache.tools.ant.taskdefs.optional.depend.constantpool.ClassCPInfo,org.apache.tools.ant.taskdefs.optional.depend.constantpool.InvokeDynamicCPInfo,org.apache.tools.ant.taskdefs.optional.depend.constantpool.MethodRefCPInfo,org.apache.tools.ant.taskdefs.optional.depend.constantpool.DoubleCPInfo,org.apache.tools.ant.taskdefs.optional.depend.constantpool.IntegerCPInfo,org.apache.tools.ant.taskdefs.optional.depend.constantpool.FloatCPInfo,org.apache.tools.ant.taskdefs.optional.depend.constantpool.Utf8CPInfo
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.MethodHandleCPInfo,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.ConstantPool,0,0,1,1,1,0,1,0,0,1,1,0,1,0,0,0,1
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.InterfaceMethodRefCPInfo,0,1,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.ConstantCPInfo,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.ConstantPoolEntry,1,0,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.StringCPInfo,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.NameAndTypeCPInfo,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.LongCPInfo,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.MethodTypeCPInfo,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.FieldRefCPInfo,0,1,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.ClassCPInfo,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.InvokeDynamicCPInfo,0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.MethodRefCPInfo,0,1,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.DoubleCPInfo,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.IntegerCPInfo,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.FloatCPInfo,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+org.apache.tools.ant.taskdefs.optional.depend.constantpool.Utf8CPInfo,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0

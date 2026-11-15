@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.optional.junit.XMLResultAggregator,org.apache.tools.ant.taskdefs.optional.junit.AggregateTransformer
+org.apache.tools.ant.taskdefs.optional.junit.XMLResultAggregator,0,1
+org.apache.tools.ant.taskdefs.optional.junit.AggregateTransformer,1,0

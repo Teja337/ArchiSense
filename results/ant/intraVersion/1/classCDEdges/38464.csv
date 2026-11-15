@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.optional.script.ScriptDef,org.apache.tools.ant.taskdefs.optional.script.ScriptDefBase
+org.apache.tools.ant.taskdefs.optional.script.ScriptDef,0,1
+org.apache.tools.ant.taskdefs.optional.script.ScriptDefBase,1,0

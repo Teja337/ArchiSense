@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.optional.XMLValidateTask$ValidatorErrorHandler,org.apache.tools.ant.taskdefs.optional.XMLValidateTask
+org.apache.tools.ant.taskdefs.optional.XMLValidateTask$ValidatorErrorHandler,0,1
+org.apache.tools.ant.taskdefs.optional.XMLValidateTask,1,0

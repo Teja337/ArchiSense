@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.Get$GetThread,org.apache.tools.ant.taskdefs.Get
+org.apache.tools.ant.taskdefs.Get$GetThread,0,1
+org.apache.tools.ant.taskdefs.Get,1,0

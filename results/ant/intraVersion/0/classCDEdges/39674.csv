@@ -1,0 +1,8 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.optional.native2ascii.Native2AsciiAdapterFactory,org.apache.tools.ant.taskdefs.optional.native2ascii.KaffeNative2Ascii,org.apache.tools.ant.taskdefs.optional.Native2Ascii,org.apache.tools.ant.taskdefs.optional.native2ascii.SunNative2Ascii,org.apache.tools.ant.taskdefs.optional.native2ascii.DefaultNative2Ascii,org.apache.tools.ant.taskdefs.optional.Native2Ascii$ExtMapper
+org.apache.tools.ant.taskdefs.optional.native2ascii.Native2AsciiAdapterFactory,0,1,0,1,0,0
+org.apache.tools.ant.taskdefs.optional.native2ascii.KaffeNative2Ascii,0,0,1,0,1,0
+org.apache.tools.ant.taskdefs.optional.Native2Ascii,1,0,0,0,0,1
+org.apache.tools.ant.taskdefs.optional.native2ascii.SunNative2Ascii,0,0,1,0,1,0
+org.apache.tools.ant.taskdefs.optional.native2ascii.DefaultNative2Ascii,0,0,1,0,0,0
+org.apache.tools.ant.taskdefs.optional.Native2Ascii$ExtMapper,0,0,1,0,0,0

@@ -1,0 +1,2 @@
+analysedVersions,analysedTimeSpanInDays,numOfIntraVersionSmells,numOfIntraVersionClassCDs,numOfIntraVersionPackCDs,numOfIntraVersionHDs,numOfIntraVersionUDs,numOfInterVersionSmells,numOfInterVersionClassCDs,numOfInterVersionPackCDs,numOfInterVersionHDs,numOfInterVersionUDs
+3,634,218,164,6,12,36,73,55,2,4,12

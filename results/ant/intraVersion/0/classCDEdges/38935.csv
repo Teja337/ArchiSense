@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.PathConvert$MapEntry,org.apache.tools.ant.taskdefs.PathConvert
+org.apache.tools.ant.taskdefs.PathConvert$MapEntry,0,1
+org.apache.tools.ant.taskdefs.PathConvert,1,0

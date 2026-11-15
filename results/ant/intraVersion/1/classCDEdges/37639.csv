@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.FixCRLF$OneLiner$BufferLine,org.apache.tools.ant.taskdefs.FixCRLF$OneLiner
+org.apache.tools.ant.taskdefs.FixCRLF$OneLiner$BufferLine,0,1
+org.apache.tools.ant.taskdefs.FixCRLF$OneLiner,1,0

@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.optional.sound.SoundTask$BuildAlert,org.apache.tools.ant.taskdefs.optional.sound.SoundTask
+org.apache.tools.ant.taskdefs.optional.sound.SoundTask$BuildAlert,0,1
+org.apache.tools.ant.taskdefs.optional.sound.SoundTask,1,0

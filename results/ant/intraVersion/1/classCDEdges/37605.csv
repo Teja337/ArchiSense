@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.BuildFileRule,org.apache.tools.ant.BuildFileRule$AntTestListener
+org.apache.tools.ant.BuildFileRule,0,1
+org.apache.tools.ant.BuildFileRule$AntTestListener,1,0

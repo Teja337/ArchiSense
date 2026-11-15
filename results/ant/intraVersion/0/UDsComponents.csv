@@ -1,0 +1,13 @@
+id,mainComponent,lessStableDependedOnPackages
+29530,org.apache.tools.ant.util,"org.apache.tools.ant.types.resources,org.apache.tools.ant.launch,org.apache.tools.ant.util.regexp,org.apache.tools.ant.taskdefs,org.apache.tools.ant.types.resources.selectors,org.apache.tools.ant.taskdefs.condition,org.apache.tools.ant.types.selectors,org.apache.tools.ant.filters.util"
+29494,org.apache.tools.ant.taskdefs,"org.apache.tools.zip,org.apache.tools.tar,org.apache.tools.ant.types.resources.comparators,org.apache.tools.ant.taskdefs.launcher,org.apache.tools.ant.attribute,org.apache.tools.ant.filters,org.apache.tools.ant.launch,org.apache.tools.ant.taskdefs.optional,org.apache.tools.ant.taskdefs.rmic,org.apache.tools.ant.taskdefs.email,org.apache.tools.ant.taskdefs.compilers,org.apache.tools.ant.input,org.apache.tools.ant.types.spi"
+29659,org.apache.tools.ant.taskdefs.optional.native2ascii,org.apache.tools.ant.taskdefs.optional
+29545,org.apache.tools.ant.taskdefs.condition,"org.apache.tools.ant.taskdefs,org.apache.tools.ant.types.selectors,org.apache.tools.zip"
+29647,org.apache.tools.ant.taskdefs.optional.net,org.apache.tools.ant.taskdefs.email
+29569,org.apache.tools.ant.filters.util,org.apache.tools.ant.filters
+29503,org.apache.tools.ant.types.resources,"org.apache.tools.ant.taskdefs,org.apache.tools.ant.types.resources.comparators,org.apache.tools.ant.types.selectors,org.apache.tools.zip,org.apache.tools.bzip2,org.apache.tools.ant.types.resources.selectors,org.apache.tools.ant.filters.util,org.apache.tools.tar"
+29710,org.apache.tools.ant.taskdefs.optional.jsp,org.apache.tools.ant.taskdefs.optional.jsp.compilers
+29554,org.apache.tools.ant.types.resources.selectors,"org.apache.tools.ant.types.resources.comparators,org.apache.tools.ant.types.selectors"
+29476,org.apache.tools.ant,"org.apache.tools.ant.helper,org.apache.tools.ant.types.selectors,org.apache.tools.zip,org.apache.tools.ant.launch,org.apache.tools.ant.util,org.apache.tools.ant.property,org.apache.tools.ant.input,org.apache.tools.ant.types.resources,org.apache.tools.ant.listener,org.apache.tools.ant.taskdefs.condition,org.apache.tools.ant.taskdefs,org.apache.tools.ant.dispatch,org.apache.tools.ant.attribute"
+29626,org.apache.tools.ant.taskdefs.optional.javah,org.apache.tools.ant.taskdefs.optional
+29464,org.apache.tools.ant.types,"org.apache.tools.ant,org.apache.tools.tar,org.apache.tools.ant.taskdefs.condition,org.apache.tools.ant.util,org.apache.tools.ant.helper,org.apache.tools.ant.types.resources,org.apache.tools.zip,org.apache.tools.ant.types.selectors,org.apache.tools.ant.util.regexp,org.apache.tools.ant.taskdefs"

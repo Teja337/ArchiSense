@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.ProcessDestroyer$ProcessDestroyerImpl,org.apache.tools.ant.taskdefs.ProcessDestroyer
+org.apache.tools.ant.taskdefs.ProcessDestroyer$ProcessDestroyerImpl,0,1
+org.apache.tools.ant.taskdefs.ProcessDestroyer,1,0

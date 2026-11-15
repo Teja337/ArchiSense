@@ -1,0 +1,5 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.Parallel$TaskRunnable,org.apache.tools.ant.taskdefs.Parallel,org.apache.tools.ant.taskdefs.Parallel$1
+org.apache.tools.ant.taskdefs.Parallel$TaskRunnable,0,1,0
+org.apache.tools.ant.taskdefs.Parallel,1,0,1
+org.apache.tools.ant.taskdefs.Parallel$1,0,1,0

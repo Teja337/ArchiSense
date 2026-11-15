@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.Javadoc$1,org.apache.tools.ant.taskdefs.Javadoc
+org.apache.tools.ant.taskdefs.Javadoc$1,0,1
+org.apache.tools.ant.taskdefs.Javadoc,1,0

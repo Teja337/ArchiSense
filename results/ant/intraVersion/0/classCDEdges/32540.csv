@@ -1,0 +1,6 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.zip.NioZipEncoding,org.apache.tools.zip.ZipEncodingHelper$SimpleEncodingHolder,org.apache.tools.zip.Simple8BitZipEncoding,org.apache.tools.zip.ZipEncodingHelper
+org.apache.tools.zip.NioZipEncoding,0,0,0,1
+org.apache.tools.zip.ZipEncodingHelper$SimpleEncodingHolder,0,0,1,0
+org.apache.tools.zip.Simple8BitZipEncoding,0,0,0,1
+org.apache.tools.zip.ZipEncodingHelper,1,1,0,0

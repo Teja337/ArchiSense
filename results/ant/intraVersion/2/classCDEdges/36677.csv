@@ -1,0 +1,5 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.Apt,org.apache.tools.ant.taskdefs.compilers.AptCompilerAdapter,org.apache.tools.ant.taskdefs.compilers.AptExternalCompilerAdapter
+org.apache.tools.ant.taskdefs.Apt,0,0,1
+org.apache.tools.ant.taskdefs.compilers.AptCompilerAdapter,1,0,0
+org.apache.tools.ant.taskdefs.compilers.AptExternalCompilerAdapter,1,1,0

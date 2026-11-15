@@ -1,0 +1,4 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.optional.ejb.JbossDeploymentTool,org.apache.tools.ant.taskdefs.optional.ejb.EjbJar
+org.apache.tools.ant.taskdefs.optional.ejb.JbossDeploymentTool,0,1
+org.apache.tools.ant.taskdefs.optional.ejb.EjbJar,1,0

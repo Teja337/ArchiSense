@@ -1,0 +1,5 @@
+dependency edge outgoing from,dependency edge incoming to...
+org.apache.tools.ant.taskdefs.Zip$5,org.apache.tools.ant.taskdefs.Zip$2,org.apache.tools.ant.taskdefs.Zip
+org.apache.tools.ant.taskdefs.Zip$5,0,0,1
+org.apache.tools.ant.taskdefs.Zip$2,0,0,1
+org.apache.tools.ant.taskdefs.Zip,1,1,0
