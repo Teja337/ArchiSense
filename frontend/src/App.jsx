@@ -142,12 +142,12 @@ function App() {
     <div className="app-shell">
       <aside className="sidebar">
         <div className="brand">
-          <div className="brand-mark">A</div>
-          <div>
-            <h2>ArchiSense</h2>
-            <span>ARCHITECTURE INTELLIGENCE</span>
-          </div>
-        </div>
+  <div className="brand-mark">A</div>
+  <div className="brand-text">
+    <h2>ArchiSense</h2>
+    <span>ARCHITECTURE INTELLIGENCE</span>
+  </div>
+</div>
 
         <p className="nav-label">WORKSPACE</p>
 
@@ -184,9 +184,25 @@ function App() {
           </div>
 
           <div className="top-right">
-            <span className="environment">LOCAL ENVIRONMENT</span>
-            <div className="avatar">AS</div>
-          </div>
+  <span className="environment">LOCAL ENVIRONMENT</span>
+
+  <div className="avatar" title="ArchiSense">
+    <svg
+      viewBox="0 0 24 24"
+      width="21"
+      height="21"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="8" r="3.5" />
+      <path d="M5 20c.8-3.5 3.3-5.5 7-5.5s6.2 2 7 5.5" />
+    </svg>
+  </div>
+</div>
         </header>
 
         <section className="content">

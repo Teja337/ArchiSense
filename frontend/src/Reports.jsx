@@ -85,7 +85,7 @@ function Reports() {
 
   if (loading) {
     return (
-      <section className="panel">
+      <section className="panel report-panel">
         Loading report data...
       </section>
     );
@@ -93,7 +93,7 @@ function Reports() {
 
   if (error) {
     return (
-      <section className="panel">
+      <section className="panel results-panel report-panel">
         <div className="notice">{error}</div>
       </section>
     );
@@ -101,7 +101,7 @@ function Reports() {
 
   if (!evolution || results.length === 0) {
     return (
-      <section className="panel">
+      <section className="panel report-panel">
         No report data is currently available.
       </section>
     );
@@ -282,7 +282,7 @@ function Reports() {
         </p>
       </section>
 
-      <footer>
+      <footer className="report-footer">
         Report generated from prepared Apache Ant AsTdEA results.
         No new analysis was executed.
       </footer>

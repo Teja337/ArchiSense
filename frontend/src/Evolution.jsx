@@ -48,7 +48,7 @@ function Evolution() {
   ];
 
   return (
-    <section className="panel results-panel">
+   <section className="panel results-panel evolution-page">
       <div className="panel-heading">
         <div>
           <h3>Apache Ant — Evolution Analysis</h3>

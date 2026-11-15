@@ -90,7 +90,7 @@ function Analysis() {
         <span className="research-tag">REAL AsTdEA RESULTS</span>
       </div>
 
-      <section className="panel">
+      <section className="panel analysis-panel">
         <div className="panel-heading">
           <div>
             <h3>Analysis filters</h3>
@@ -132,7 +132,7 @@ function Analysis() {
         </div>
       </section>
 
-      <section className="panel results-panel">
+      <section className="panel results-panel analysis-panel">
         <div className="panel-heading">
           <div>
             <h3>
