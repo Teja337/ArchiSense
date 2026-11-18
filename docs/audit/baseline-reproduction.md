@@ -12,23 +12,45 @@
 - **Skipped:** 0
 - **Result:** BUILD SUCCESS
 
-The initial two test errors were resolved by creating the missing `resources` directory in the separate test copy. No original Java source files were modified.
+The initial two test errors were resolved by creating the missing `resources` directory in the separate test copy. No original Java source files were modified to resolve these initial test errors.
 
 ## 2. Fresh AsTdEA Engine Execution
 
-The original AsTdEA engine was executed again using the prepared Apache Ant dataset.
+The AsTdEA engine was executed using the prepared Apache Ant dataset.
 
 - **Dataset:** Apache Ant
 - **Versions analysed:** ant-1.9.4, ant-1.9.5, ant-1.9.6
 - **Execution mode:** Fresh analysis using Arcan
 - **Input directory:** `datasets`
 - **Output directory:** Temporary runtime output
-- **Execution method:** Java classpath execution with the original AsTdEA JAR, modified Arcan JAR, and required library dependencies.
+- **Execution method:** Java classpath execution with the AsTdEA JAR, rebuilt Arcan JAR, and required library dependencies.
 - **Result:** Successful execution
 
 The engine completed analysis for all three versions and generated intra-version and inter-version metric files.
 
-## 3. Baseline Metric Comparison
+## 3. Arcan Runtime Correction
+
+During fresh analysis, a null-handling issue was encountered in the bundled Arcan implementation.
+
+A minimal null guard was added to:
+
+`runtime/arcan-source/src/main/it/unimib/disco/essere/main/asengine/udutils/UDUtils.java`
+
+The correction handles a null `badDependencies` collection before iteration. It does not introduce a new architecture-smell detection algorithm or change the intended AsTdEA research methodology.
+
+The modified Arcan source was rebuilt successfully, and the resulting JAR was used for fresh analysis.
+
+The original Arcan JAR was preserved as:
+
+`runtime/arcan-source/arcan-1.2.1-modded-original.jar`
+
+The rebuilt JAR is:
+
+`original/AsTdEA/libs/arcan-1.2.1-modded.jar`
+
+This runtime correction is documented to distinguish the verified execution environment from an entirely unmodified original distribution.
+
+## 4. Baseline Metric Comparison
 
 The freshly generated metrics were compared against the previously reproduced baseline results.
 
@@ -49,10 +71,12 @@ The freshly generated metrics were compared against the previously reproduced ba
 
 All compared intra-version and inter-version metric fields matched the original baseline values.
 
-## 4. Verification Conclusion
+## 5. Verification Conclusion
 
 The fresh execution successfully reproduced the original AsTdEA baseline metrics for all three Apache Ant versions.
 
-This confirms that the prepared dataset, engine, and runtime dependencies can be used to perform a fresh analysis and reproduce the existing baseline results.
+This confirms that the prepared dataset, AsTdEA engine, rebuilt Arcan dependency, and runtime dependencies can be used to perform a fresh analysis and reproduce the existing baseline results.
 
-The original AsTdEA Java source files and existing baseline result files were not modified during this verification.
+The AsTdEA analysis methodology was not intentionally changed as part of this verification. A minimal null-handling correction was made in the bundled Arcan source to allow fresh analysis to complete. The original Arcan JAR was preserved separately.
+
+The existing baseline result files were not modified during this verification.
