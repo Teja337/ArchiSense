@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import "./App.css";
 import { getProjects, getVersions, getResults } from "./api";
@@ -24,20 +25,62 @@ function App() {
   const [notice, setNotice] = useState("");
   const [loading, setLoading] = useState(true);
   const [backendStatus, setBackendStatus] = useState("Checking");
+  const [analysisRunning, setAnalysisRunning] = useState(false);
+  const [lastRunId, setLastRunId] = useState("");
+  const [refreshKey, setRefreshKey] = useState(0);
 
+  // Refresh the shared project list after a successful upload.
+  async function refreshProjects() {
+    try {
+      const data = await getProjects();
+
+      setProjects(data);
+      setBackendStatus("Connected");
+
+      setProject((currentProject) => {
+        if (data.some((item) => item.id === currentProject)) {
+          return currentProject;
+        }
+
+        const uploadedProjects = data.filter(
+          (item) => item.id !== "ant"
+        );
+
+        return uploadedProjects.length > 0
+          ? uploadedProjects[uploadedProjects.length - 1].id
+          : data[0]?.id || "ant";
+      });
+    } catch (error) {
+      console.error("Unable to refresh projects:", error);
+      setBackendStatus("Disconnected");
+    }
+  }
+
+  // Load registered projects when the application starts.
   useEffect(() => {
     async function loadProjects() {
       try {
         const data = await getProjects();
+
         setProjects(data);
         setBackendStatus("Connected");
 
         if (data.length > 0) {
-          setProject(data[0].id);
+          const uploadedProjects = data.filter(
+            (item) => item.id !== "ant"
+          );
+
+          setProject(
+            uploadedProjects.length > 0
+              ? uploadedProjects[uploadedProjects.length - 1].id
+              : data[0].id
+          );
         }
       } catch (error) {
         setBackendStatus("Disconnected");
-        setNotice(error.message);
+        setNotice(
+          error.message || "Unable to connect to backend."
+        );
       } finally {
         setLoading(false);
       }
@@ -46,35 +89,65 @@ function App() {
     loadProjects();
   }, []);
 
+  // Load versions and results independently for the selected project.
   useEffect(() => {
+    let cancelled = false;
+
     async function loadProjectData() {
       if (!project) return;
 
-      try {
-        const [versionData, resultData] = await Promise.all([
+      setResults([]);
+      setVersions([]);
+      setSelectedVersions([]);
+      setNotice("");
+
+      const [versionOutcome, resultOutcome] =
+        await Promise.allSettled([
           getVersions(project),
           getResults(project),
         ]);
 
+      if (cancelled) return;
+
+      if (versionOutcome.status === "fulfilled") {
+        const versionData = versionOutcome.value;
+
         setVersions(versionData);
         setSelectedVersions(versionData);
-        setResults(resultData);
-        setNotice("");
-      } catch (error) {
+      } else {
         setVersions([]);
         setSelectedVersions([]);
+
+        setNotice(
+          "Could not load project versions: " +
+            (versionOutcome.reason?.message || "Unknown error")
+        );
+      }
+
+      if (resultOutcome.status === "fulfilled") {
+        setResults(resultOutcome.value);
+      } else {
         setResults([]);
-        setNotice(error.message);
+
+        setNotice((current) =>
+          current
+            ? current + " | Existing analysis results are unavailable."
+            : "Existing analysis results are unavailable. Run a fresh analysis."
+        );
       }
     }
 
     loadProjectData();
+
+    return () => {
+      cancelled = true;
+    };
   }, [project]);
 
   function toggleVersion(version) {
     setSelectedVersions((current) =>
       current.includes(version)
-        ? current.filter((v) => v !== version)
+        ? current.filter((item) => item !== version)
         : [...current, version]
     );
   }
@@ -82,9 +155,13 @@ function App() {
   const selectedVersion = selectedVersions[0];
   const selectedVersionIndex = versions.indexOf(selectedVersion);
 
-  const selectedResult = results.find(
-    (item) => Number(item.versionIndex) === selectedVersionIndex
-  );
+  const selectedResult =
+    project !== "ant"
+      ? results[0] || null
+      : results.find(
+          (item) =>
+            Number(item.versionIndex) === selectedVersionIndex
+        ) || null;
 
   const selectedProject = projects.find(
     (item) => item.id === project
@@ -103,17 +180,58 @@ function App() {
     });
   }
 
-  function startAnalysis() {
+  // Run fresh analysis for the selected project.
+  async function startAnalysis() {
+    if (!project) {
+      setNotice("Please select a project first.");
+      return;
+    }
+
     if (!selectedVersions.length) {
       setNotice("Please select at least one software version.");
       return;
     }
 
-    setNotice(
-      "Showing existing AsTdEA results for " +
-      selectedVersions.join(", ") +
-      ". No new analysis has been executed."
-    );
+    if (analysisRunning) return;
+
+    try {
+      setAnalysisRunning(true);
+      setLastRunId("");
+      setNotice("Fresh AsTdEA analysis is running. Please wait...");
+
+      const response = await fetch(
+        `http://localhost:8080/api/analysis/run?projectId=${encodeURIComponent(project)}`,
+        {
+          method: "POST",
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message ||
+            data.error ||
+            "Analysis execution failed."
+        );
+      }
+
+      const runIdentifier =
+        data.runId || data.analysisOutput || "";
+
+      setLastRunId(runIdentifier);
+
+      const refreshedResults = await getResults(project);
+      setResults(refreshedResults);
+
+      setRefreshKey((current) => current + 1);
+
+      setNotice("Analysis completed successfully!");
+    } catch (error) {
+      setNotice("Analysis failed: " + error.message);
+    } finally {
+      setAnalysisRunning(false);
+    }
   }
 
   const metricCards = [
@@ -121,12 +239,16 @@ function App() {
     ["Versions", versions.length, "Available versions"],
     [
       "Architecture smells",
-      selectedResult ? formatNumber(selectedResult.ASCount) : "—",
+      selectedResult
+        ? formatNumber(selectedResult.ASCount)
+        : "—",
       "Detected by AsTdEA",
     ],
     [
       "Technical debt",
-      selectedResult ? formatNumber(selectedResult.TDAmount, 2) : "—",
+      selectedResult
+        ? formatNumber(selectedResult.TDAmount, 2)
+        : "—",
       "Calculated debt amount",
     ],
   ];
@@ -142,12 +264,13 @@ function App() {
     <div className="app-shell">
       <aside className="sidebar">
         <div className="brand">
-  <div className="brand-mark">A</div>
-  <div className="brand-text">
-    <h2>ArchiSense</h2>
-    <span>ARCHITECTURE INTELLIGENCE</span>
-  </div>
-</div>
+          <div className="brand-mark">A</div>
+
+          <div className="brand-text">
+            <h2>ArchiSense</h2>
+            <span>ARCHITECTURE INTELLIGENCE</span>
+          </div>
+        </div>
 
         <p className="nav-label">WORKSPACE</p>
 
@@ -155,7 +278,9 @@ function App() {
           {menu.map(([label, symbol]) => (
             <button
               key={label}
-              className={`nav-item ${active === label ? "selected" : ""}`}
+              className={`nav-item ${
+                active === label ? "selected" : ""
+              }`}
               onClick={() => setActive(label)}
             >
               <span>{symbol}</span>
@@ -167,11 +292,13 @@ function App() {
         <div className="sidebar-bottom">
           <div className="engine-status">
             <span className="status-dot" />
+
             <div>
               <strong>Analysis engine</strong>
-              <small>Local AsTdEA results available</small>
+              <small>AsTdEA engine available locally</small>
             </div>
           </div>
+
           <p>ArchiSense · Research Edition</p>
         </div>
       </aside>
@@ -179,52 +306,80 @@ function App() {
       <main className="main-area">
         <header className="topbar">
           <div>
-            <span className="breadcrumb">Workspace / {active}</span>
+            <span className="breadcrumb">
+              Workspace / {active}
+            </span>
             <h1>{active}</h1>
           </div>
 
           <div className="top-right">
-  <span className="environment">LOCAL ENVIRONMENT</span>
+            <span className="environment">
+              LOCAL ENVIRONMENT
+            </span>
 
-  <div className="avatar" title="ArchiSense">
-    <svg
-      viewBox="0 0 24 24"
-      width="21"
-      height="21"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <circle cx="12" cy="8" r="3.5" />
-      <path d="M5 20c.8-3.5 3.3-5.5 7-5.5s6.2 2 7 5.5" />
-    </svg>
-  </div>
-</div>
+            <div className="avatar" title="ArchiSense">
+              <svg
+                viewBox="0 0 24 24"
+                width="21"
+                height="21"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="8" r="3.5" />
+                <path d="M5 20c.8-3.5 3.3-5.5 7-5.5s6.2 2 7 5.5" />
+              </svg>
+            </div>
+          </div>
         </header>
 
         <section className="content">
+
+          {/* Keep Projects mounted during tab switching. */}
+          <div
+            style={{
+              display: active === "Projects" ? "block" : "none",
+            }}
+          >
+            <Projects onUploadComplete={refreshProjects} />
+          </div>
+
           {active === "Evolution" ? (
-  <Evolution />
-) : active === "Analysis" ? (
-  <Analysis />
-) : active === "Reports" ? (
-  <Reports />
-) : active === "Projects" ? (
-  <Projects />
-) : (
+            <Evolution
+              key={refreshKey}
+              projectId={project}
+            />
+          ) : active === "Analysis" ? (
+            <Analysis
+              key={refreshKey}
+              projectId={project}
+              versions={versions}
+            />
+          ) : active === "Reports" ? (
+            <Reports
+              key={refreshKey}
+              projectId={project}
+            />
+          ) : active === "Overview" ? (
             <>
               <div className="welcome-row">
                 <div>
-                  <h2>Architectural Technical Debt Analysis</h2>
+                  <h2>
+                    Architectural Technical Debt Analysis
+                  </h2>
+
                   <p>
                     Analyze architecture smells, dependencies and
                     technical debt across software versions.
                   </p>
                 </div>
-                <span className="research-tag">RESEARCH WORKSPACE</span>
+
+                <span className="research-tag">
+                  RESEARCH WORKSPACE
+                </span>
               </div>
 
               <div className="metric-grid">
@@ -242,8 +397,11 @@ function App() {
                   <div className="panel-heading">
                     <div>
                       <h3>Analysis workspace</h3>
-                      <p>Choose a project and its software versions.</p>
+                      <p>
+                        Choose a project and its software versions.
+                      </p>
                     </div>
+
                     <span className="step-label">STEP 01</span>
                   </div>
 
@@ -252,7 +410,9 @@ function App() {
                   <select
                     id="project"
                     value={project}
-                    onChange={(e) => setProject(e.target.value)}
+                    onChange={(event) =>
+                      setProject(event.target.value)
+                    }
                     disabled={loading || projects.length === 0}
                   >
                     {projects.map((item) => (
@@ -262,18 +422,25 @@ function App() {
                     ))}
                   </select>
 
-                  {selectedProject && <p>{selectedProject.description}</p>}
+                  {selectedProject && (
+                    <p>{selectedProject.description}</p>
+                  )}
 
                   <label>Software versions</label>
 
                   <div className="version-list">
                     {versions.map((version) => (
-                      <label className="version-option" key={version}>
+                      <label
+                        className="version-option"
+                        key={version}
+                      >
                         <input
                           type="checkbox"
                           checked={selectedVersions.includes(version)}
                           onChange={() => toggleVersion(version)}
+                          disabled={analysisRunning}
                         />
+
                         <span>{version}</span>
                         <small>Prepared dataset</small>
                       </label>
@@ -287,20 +454,43 @@ function App() {
                   <button
                     className="primary-button"
                     onClick={startAnalysis}
-                    disabled={selectedVersions.length === 0}
+                    disabled={
+                      selectedVersions.length === 0 ||
+                      analysisRunning
+                    }
                   >
-                    View selected results <span>→</span>
+                    {analysisRunning
+                      ? "Running Analysis..."
+                      : "Run Fresh Analysis"}
+
+                    <span>
+                      {analysisRunning ? "..." : "→"}
+                    </span>
                   </button>
 
-                  {notice && <div className="notice">{notice}</div>}
+                  {notice && (
+                    <div className="notice" role="status">
+                      {notice}
+                    </div>
+                  )}
+
+                  {lastRunId && (
+                    <div className="status-note">
+                      <strong>Latest analysis run</strong>
+                      <p>{lastRunId}</p>
+                    </div>
+                  )}
                 </section>
 
                 <section className="panel status-panel">
                   <div className="panel-heading">
                     <div>
                       <h3>System status</h3>
-                      <p>Application integration overview.</p>
+                      <p>
+                        Application integration overview.
+                      </p>
                     </div>
+
                     <span className="status-dot" />
                   </div>
 
@@ -316,7 +506,13 @@ function App() {
 
                   <div className="status-row">
                     <span>Java backend</span>
-                    <strong className={backendStatus === "Connected" ? "good" : "pending"}>
+                    <strong
+                      className={
+                        backendStatus === "Connected"
+                          ? "good"
+                          : "pending"
+                      }
+                    >
                       {backendStatus}
                     </strong>
                   </div>
@@ -324,13 +520,17 @@ function App() {
                   <div className="status-row">
                     <span>Results integration</span>
                     <strong className="good">
-                      {results.length > 0 ? "Connected" : "Pending"}
+                      {results.length > 0
+                        ? "Connected"
+                        : "Pending"}
                     </strong>
                   </div>
 
                   <div className="status-note">
                     <strong>Selected version</strong>
-                    <p>{selectedVersion || "No version selected"}</p>
+                    <p>
+                      {selectedVersion || "No version selected"}
+                    </p>
                   </div>
                 </section>
               </div>
@@ -340,11 +540,15 @@ function App() {
                   <div>
                     <h3>Analysis results</h3>
                     <p>
-                      Original AsTdEA measurements for the selected version.
+                      Latest AsTdEA analysis measurements for the
+                      selected version.
                     </p>
                   </div>
+
                   <span className="pending-tag">
-                    {selectedResult ? "RESULTS AVAILABLE" : "NO RESULTS"}
+                    {selectedResult
+                      ? "RESULTS AVAILABLE"
+                      : "NO RESULTS"}
                   </span>
                 </div>
 
@@ -353,7 +557,11 @@ function App() {
                     {issueMetrics.map(([label, key]) => (
                       <article className="metric-card" key={key}>
                         <span>{label}</span>
-                        <strong>{formatNumber(selectedResult[key])}</strong>
+
+                        <strong>
+                          {formatNumber(selectedResult[key])}
+                        </strong>
+
                         <small>{selectedVersion}</small>
                       </article>
                     ))}
@@ -361,7 +569,9 @@ function App() {
                 ) : (
                   <div className="empty-state">
                     <div className="empty-icon">⌁</div>
+
                     <strong>No version selected</strong>
+
                     <p>
                       Select a software version to view its existing
                       AsTdEA results.
@@ -375,7 +585,7 @@ function App() {
                 Architectural Technical Debt in Java Systems
               </footer>
             </>
-          )}
+          ) : null}
         </section>
       </main>
     </div>

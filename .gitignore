@@ -43,3 +43,26 @@ arcan-help.txt
 
 # Unused local dependency collection
 original/AsTdEA/libs/lib/
+# Generated analysis output and uploaded projects
+runtime/engine-output/
+uploads/
+
+# Arcan source project: exclude IDE configuration
+runtime/arcan-source/.classpath
+runtime/arcan-source/.project
+runtime/arcan-source/.settings/
+runtime/arcan-source/*.iml
+
+# Arcan generated build outputs
+runtime/arcan-source/out/
+runtime/arcan-source/target/
+
+# Arcan local and backup configuration files
+runtime/arcan-source/cp.txt
+runtime/arcan-source/pom.xml.bak
+runtime/arcan-source/maven-settings.xml
+
+# Arcan generated resource class
+runtime/arcan-source/resources/AnnotatedFieldInjection.class
+
+runtime/arcan-source/**/.settings/

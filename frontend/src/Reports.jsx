@@ -1,7 +1,6 @@
+
 import { useEffect, useState } from "react";
 import { getResults, getEvolution } from "./api";
-
-const versionNames = ["Ant 1.9.4", "Ant 1.9.5", "Ant 1.9.6"];
 
 function formatNumber(value, decimals = 0) {
   const number = Number(value);
@@ -14,31 +13,59 @@ function formatNumber(value, decimals = 0) {
   });
 }
 
-function Reports() {
+function Reports({ projectId = "ant" }) {
   const [results, setResults] = useState([]);
   const [evolution, setEvolution] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    async function loadReportData() {
-      try {
-        const [resultData, evolutionData] = await Promise.all([
-          getResults("ant"),
-          getEvolution("ant"),
-        ]);
+  const isAnt = projectId === "ant";
 
-        setResults(resultData);
-        setEvolution(evolutionData);
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadReportData() {
+      setLoading(true);
+      setError("");
+      setResults([]);
+      setEvolution(null);
+
+      try {
+        const resultData = await getResults(projectId);
+
+        if (!Array.isArray(resultData)) {
+          throw new Error("The server returned an unexpected results format.");
+        }
+
+        let evolutionData = null;
+
+        if (isAnt) {
+          evolutionData = await getEvolution(projectId);
+        }
+
+        if (!cancelled) {
+          setResults(resultData);
+          setEvolution(evolutionData);
+        }
       } catch (err) {
-        setError(err.message || "Unable to load report data.");
+        if (!cancelled) {
+          setError(err.message || "Unable to load report data.");
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
     }
 
-    loadReportData();
-  }, []);
+    if (projectId) {
+      loadReportData();
+    }
+
+    return () => {
+      cancelled = true;
+    };
+  }, [projectId, isAnt]);
 
   function exportCSV() {
     const headers = [
@@ -49,16 +76,22 @@ function Reports() {
       "Package Cycles",
       "Hub Dependencies",
       "Unstable Dependencies",
+      "Lines of Code",
+      "Total Classes",
+      "Total Packages",
     ];
 
     const rows = results.map((item) => [
-      versionNames[Number(item.versionIndex)] || item.versionIndex,
+      item.versionLabel || `Version ${item.versionIndex}`,
       item.ASCount,
       item.TDAmount,
       item.classCDCount,
       item.packageCDCount,
       item.HDCount,
       item.UDCount,
+      item.LOC,
+      item.totalClassCount,
+      item.totalPackageCount,
     ]);
 
     const csvContent = [headers, ...rows]
@@ -77,9 +110,10 @@ function Reports() {
     const link = document.createElement("a");
 
     link.href = url;
-    link.download = "archisense-ant-analysis-report.csv";
+    link.download = `archisense-${projectId}-analysis-report.csv`;
+    document.body.appendChild(link);
     link.click();
-
+    link.remove();
     URL.revokeObjectURL(url);
   }
 
@@ -99,35 +133,31 @@ function Reports() {
     );
   }
 
-  if (!evolution || results.length === 0) {
+  if (results.length === 0) {
     return (
       <section className="panel report-panel">
-        No report data is currently available.
+        <strong>No report data is currently available.</strong>
+        <p>Complete an AsTdEA analysis for this project first.</p>
       </section>
     );
   }
 
   const issueTypes = [
-    {
-      label: "Class cycles",
-      key: "classCDCount",
-    },
-    {
-      label: "Package cycles",
-      key: "packageCDCount",
-    },
-    {
-      label: "Hub dependencies",
-      key: "HDCount",
-    },
-    {
-      label: "Unstable dependencies",
-      key: "UDCount",
-    },
+    { label: "Class cycles", key: "classCDCount" },
+    { label: "Package cycles", key: "packageCDCount" },
+    { label: "Hub dependencies", key: "HDCount" },
+    { label: "Unstable dependencies", key: "UDCount" },
   ];
 
-  const totalSmells = Number(evolution.numOfIntraVersionSmells);
-  const totalInterSmells = Number(evolution.numOfInterVersionSmells);
+  const totalSmells = isAnt
+    ? Number(evolution?.numOfIntraVersionSmells ?? 0)
+    : Number(results[0].ASCount ?? 0);
+
+  const totalInterSmells = Number(
+    evolution?.numOfInterVersionSmells ?? 0
+  );
+
+  const uploadedProject = results[0];
 
   return (
     <section className="reports-page">
@@ -136,61 +166,111 @@ function Reports() {
           <h2>Project Analysis Reports</h2>
           <p>
             Summary and comparison of original AsTdEA measurements
-            for Apache Ant.
+            for {isAnt ? "Apache Ant" : "the uploaded project"}.
           </p>
         </div>
 
-        <button
-          className="primary-button"
-          onClick={exportCSV}
-        >
+        <button className="primary-button" onClick={exportCSV}>
           Export CSV ↓
         </button>
       </div>
 
-      <section className="panel">
-        <div className="panel-heading">
-          <div>
-            <h3>Overall project summary</h3>
-            <p>Inter-version analysis measurements.</p>
-          </div>
-          <span className="pending-tag">ORIGINAL DATA</span>
-        </div>
+      {isAnt ? (
+        <>
+          <section className="panel">
+            <div className="panel-heading">
+              <div>
+                <h3>Overall project summary</h3>
+                <p>Inter-version analysis measurements.</p>
+              </div>
+              <span className="pending-tag">ORIGINAL DATA</span>
+            </div>
 
-        <div className="metric-grid">
-          <article className="metric-card">
-            <span>Analyzed versions</span>
-            <strong>{evolution.analysedVersions}</strong>
-            <small>Apache Ant releases</small>
-          </article>
+            <div className="metric-grid">
+              <article className="metric-card">
+                <span>Analyzed versions</span>
+                <strong>{formatNumber(evolution?.analysedVersions)}</strong>
+                <small>Apache Ant releases</small>
+              </article>
 
-          <article className="metric-card">
-            <span>Analysis time span</span>
-            <strong>
-              {formatNumber(evolution.analysedTimeSpanInDays)}
-            </strong>
-            <small>Days</small>
-          </article>
+              <article className="metric-card">
+                <span>Analysis time span</span>
+                <strong>
+                  {formatNumber(evolution?.analysedTimeSpanInDays)}
+                </strong>
+                <small>Days</small>
+              </article>
 
-          <article className="metric-card">
-            <span>Intra-version smells</span>
-            <strong>{formatNumber(totalSmells)}</strong>
-            <small>Across analyzed versions</small>
-          </article>
+              <article className="metric-card">
+                <span>Intra-version smells</span>
+                <strong>{formatNumber(totalSmells)}</strong>
+                <small>Across analyzed versions</small>
+              </article>
 
-          <article className="metric-card">
-            <span>Inter-version smells</span>
-            <strong>{formatNumber(totalInterSmells)}</strong>
-            <small>Across version transitions</small>
-          </article>
-        </div>
-      </section>
+              <article className="metric-card">
+                <span>Inter-version smells</span>
+                <strong>{formatNumber(totalInterSmells)}</strong>
+                <small>Across version transitions</small>
+              </article>
+            </div>
+          </section>
+        </>
+      ) : (
+        <>
+          <section className="panel">
+            <div className="panel-heading">
+              <div>
+                <h3>Uploaded project summary</h3>
+                <p>
+                  Measurements for {uploadedProject.versionLabel || "the uploaded version"}.
+                </p>
+              </div>
+              <span className="pending-tag">ORIGINAL DATA</span>
+            </div>
+
+            <div className="empty-state">
+              <strong>Single-version report</strong>
+              <p>
+                Only one software version has been analyzed.
+                Inter-version evolution and version comparisons
+                are not available yet.
+              </p>
+            </div>
+
+            <div className="metric-grid">
+              <article className="metric-card">
+                <span>Architecture smells</span>
+                <strong>{formatNumber(uploadedProject.ASCount)}</strong>
+                <small>Detected by AsTdEA</small>
+              </article>
+
+              <article className="metric-card">
+                <span>Technical debt</span>
+                <strong>{formatNumber(uploadedProject.TDAmount, 2)}</strong>
+                <small>AsTdEA measurement</small>
+              </article>
+
+              <article className="metric-card">
+                <span>Lines of code</span>
+                <strong>{formatNumber(uploadedProject.LOC)}</strong>
+                <small>Prepared source metadata</small>
+              </article>
+
+              <article className="metric-card">
+                <span>Total classes</span>
+                <strong>{formatNumber(uploadedProject.totalClassCount)}</strong>
+                <small>Analyzed version</small>
+              </article>
+            </div>
+          </section>
+        </>
+      )}
 
       <section className="panel results-panel">
         <div className="panel-heading">
           <div>
             <h3>Version-wise comparison</h3>
-            <p>Architecture measurements for each software version.</p>
+            <p>Architecture measurements for each analyzed software version.</p>
           </div>
         </div>
 
@@ -213,8 +293,11 @@ function Reports() {
                 <tr key={item.versionIndex}>
                   <td>
                     <strong>
-                      {versionNames[Number(item.versionIndex)] ||
-                        `Version ${item.versionIndex}`}
+                      {isAnt
+                        ? ["Ant 1.9.4", "Ant 1.9.5", "Ant 1.9.6"][
+                            Number(item.versionIndex)
+                          ] || item.versionLabel
+                        : item.versionLabel || "Uploaded version"}
                     </strong>
                   </td>
                   <td>{formatNumber(item.ASCount)}</td>
@@ -234,25 +317,25 @@ function Reports() {
         <div className="panel-heading">
           <div>
             <h3>Architecture issue distribution</h3>
-            <p>
-              Intra-version issue counts reported by AsTdEA.
-            </p>
+            <p>Issue counts reported by AsTdEA.</p>
           </div>
         </div>
 
         <div className="report-distribution">
           {issueTypes.map((issue) => {
-            const value = Number(evolution[
-              `numOfIntraVersion${
-                issue.key === "classCDCount"
-                  ? "ClassCDs"
-                  : issue.key === "packageCDCount"
-                    ? "PackCDs"
-                    : issue.key === "HDCount"
-                      ? "HDs"
-                      : "UDs"
-              }`
-            ]);
+            const value = isAnt
+              ? Number(
+                  evolution?.[
+                    issue.key === "classCDCount"
+                      ? "numOfIntraVersionClassCDs"
+                      : issue.key === "packageCDCount"
+                        ? "numOfIntraVersionPackCDs"
+                        : issue.key === "HDCount"
+                          ? "numOfIntraVersionHDs"
+                          : "numOfIntraVersionUDs"
+                  ] ?? 0
+                )
+              : Number(uploadedProject[issue.key] ?? 0);
 
             const percentage =
               totalSmells > 0 ? (value / totalSmells) * 100 : 0;
@@ -276,14 +359,14 @@ function Reports() {
         </div>
 
         <p className="report-note">
-          Counts are displayed as reported by AsTdEA. The percentages
-          are visual proportions relative to the intra-version smell
-          total, not independent risk scores.
+          Counts are displayed as reported by AsTdEA. Percentages
+          represent proportions relative to the architecture-smell
+          total; they are not independent risk scores.
         </p>
       </section>
 
       <footer className="report-footer">
-        Report generated from prepared Apache Ant AsTdEA results.
+        Report generated from prepared AsTdEA results.
         No new analysis was executed.
       </footer>
     </section>

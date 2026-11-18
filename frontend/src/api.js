@@ -13,7 +13,7 @@ export async function getProjects() {
 
 export async function getVersions(projectId) {
   const response = await fetch(
-    `${API_BASE_URL}/projects/${projectId}/versions`
+    `${API_BASE_URL}/projects/${encodeURIComponent(projectId)}/versions`
   );
 
   if (!response.ok) {
@@ -25,7 +25,7 @@ export async function getVersions(projectId) {
 
 export async function getResults(projectId) {
   const response = await fetch(
-    `${API_BASE_URL}/projects/${projectId}/results`
+    `${API_BASE_URL}/projects/${encodeURIComponent(projectId)}/results`
   );
 
   if (!response.ok) {
@@ -37,7 +37,7 @@ export async function getResults(projectId) {
 
 export async function getEvolution(projectId) {
   const response = await fetch(
-    `${API_BASE_URL}/projects/${projectId}/evolution`
+    `${API_BASE_URL}/projects/${encodeURIComponent(projectId)}/evolution`
   );
 
   if (!response.ok) {
@@ -45,4 +45,40 @@ export async function getEvolution(projectId) {
   }
 
   return response.json();
+}
+
+// Upload a Java Maven project ZIP and run its analysis.
+export async function uploadProject(file) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await fetch(`${API_BASE_URL}/projects/upload`, {
+    method: "POST",
+    body: formData,
+  });
+
+  let data;
+
+  try {
+    data = await response.json();
+  } catch {
+    data = {
+      status: "FAILED",
+      stage: "UNKNOWN",
+      message: "The server returned an invalid response.",
+    };
+  }
+
+  if (!response.ok) {
+    const error = new Error(
+      data.message || data.error || "Project upload failed."
+    );
+
+    error.responseData = data;
+    error.statusCode = response.status;
+
+    throw error;
+  }
+
+  return data;
 }
