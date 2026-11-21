@@ -309,6 +309,24 @@ Passing unit tests does not establish that the complete application has successf
 
 A separate end-to-end execution is still required to verify the complete application workflow.
 
+### 7.6 Fresh Engine Execution and Arcan Runtime Correction
+
+After the original unit-test verification, a separate fresh engine execution was performed using the prepared Apache Ant dataset.
+
+During this execution, a runtime issue was encountered in the modified Arcan implementation. A minimal null-handling guard was applied to `UDUtils.java` in the separately maintained Arcan source.
+
+The modified Arcan source was rebuilt, producing an updated `arcan-1.2.1-modded.jar`. The rebuilt JAR was then used for fresh multi-version analysis.
+
+Important distinctions:
+
+- The original AsTdEA unit-test result of 12 passing tests was obtained separately.
+- The runtime correction was made in the Arcan source, not in AsTdEA's evolution-analysis implementation.
+- The original AsTdEA analysis methodology was preserved.
+- The original Arcan JAR backup was retained.
+- Fresh engine execution and baseline results are documented in `baseline-reproduction.md`.
+
+This correction was necessary to complete fresh engine execution and should be considered when reproducing the environment.
+
 ## 8. Potential Limitations and Areas for Verification
 
 During source-code inspection, several areas were identified that require further verification through testing and experimentation.
@@ -353,7 +371,7 @@ The following areas require additional testing:
 - Parallel execution behaviour.
 - CSV output consistency and reproducibility.
 
-### 8.6 Additional Source-Code Observations
+### 8.7 Additional Source-Code Observations
 
 The detailed source-code inspection identified several implementation concerns that require further investigation:
 
@@ -367,7 +385,7 @@ The detailed source-code inspection identified several implementation concerns t
 
 These observations are potential implementation concerns, not confirmed defects. Their practical impact must be evaluated through targeted tests.
 
-### 8.7 Observation
+### 8.8 Observation
 
 These points are preliminary audit observations, not confirmed software defects. They will be investigated through controlled experiments before any changes are proposed for ArchiSense.
 
@@ -388,13 +406,15 @@ The source-code inspection provides an understanding of the original AsTdEA impl
 ### 9.2 Current Verification Status
 
 - Original Java source inventory recorded: 96 files.
-- Source-code review completed: all 96 Java source files reviewed.
+- Source-code architecture and implementation examined.
 - Maven test suite: 12 tests passed.
 - Test failures and errors: 0 after preparing the test environment.
-- Original source preserved separately from the test copy.
+- Original AsTdEA source preserved separately from the test copy.
 - Source-level implementation concerns documented for further verification.
-- Complete end-to-end application execution: Pending.
-- Experimental verification of potential issues: Pending.
+- Fresh multi-version engine execution completed using the rebuilt Arcan JAR.
+- Baseline results documented and compared against generated reports.
+- Complete end-to-end application execution: Validated for the tested workflows.
+- Experimental verification of potential source-code concerns: Pending.
 
 ### 9.3 Conclusion
 
