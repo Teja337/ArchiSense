@@ -18,7 +18,7 @@ The validation focused on application stability, integration with the original A
 
 ## 3. Automated Validation
 
-### Backend tests
+### Backend Tests
 
 - Tests run: 15
 - Failures: 0
@@ -26,7 +26,7 @@ The validation focused on application stability, integration with the original A
 - Skipped: 0
 - Result: BUILD SUCCESS
 
-### Frontend lint
+### Frontend Lint
 
 - Errors: 0
 - Warnings: 3
@@ -34,7 +34,7 @@ The validation focused on application stability, integration with the original A
 
 The three warnings concern React state updates in `Evolution.jsx` and `Analysis.jsx`. They were recorded without making unrelated code changes.
 
-### Frontend production build
+### Frontend Production Build
 
 - Build tool: Vite 8.3.7
 - Modules transformed: 22
@@ -71,7 +71,7 @@ The Evolution measurements were also checked:
 - Inter-version hub dependencies: 4
 - Inter-version unstable dependencies: 12
 
-The Reports page and exported CSV were checked against these measurements.
+The Reports page and exported CSV were checked against these measurements. The CSV version labels were subsequently corrected to display the actual Apache Ant release names. All original baseline measurements remained unchanged.
 
 ## 5. Uploaded Project Validation
 
@@ -130,28 +130,38 @@ The following application areas were checked:
 - Backend and frontend integration
 - AsTdEA engine availability
 
-## 8. Outstanding Observations
+## 8. Validation Follow-up and Resolved Observations
 
-The following minor observations remain:
+The following observations identified during the initial validation were subsequently addressed and verified:
 
-1. Apache Ant CSV exports use the labels `Ant 1`, `Ant 2`, and `Ant 3` instead of the full release names.
-2. The single-version Evolution explanation for the uploaded test project still requires explicit visual confirmation.
+1. **Apache Ant CSV version labels:** Updated `ResultsController` to display the actual release names: `Ant 1.9.4`, `Ant 1.9.5`, and `Ant 1.9.6`. Exported CSV output was verified, and all original baseline measurements remained unchanged.
+2. **Single-version Evolution explanation:** Visually confirmed that an uploaded project with one analyzed version displays an explanatory message instead of fabricated version-to-version trends.
 
-These observations should be addressed or formally recorded before the application is declared completely finalized.
+The backend test suite was rerun after the CSV label correction:
+
+- Tests run: 15
+- Failures: 0
+- Errors: 0
+- Skipped: 0
+- Result: BUILD SUCCESS
+
+Both observations are resolved. No outstanding observations from this initial validation remain.
 
 ## 9. Repository Status
 
-At the time of this validation:
+At the time of this report update:
 
 - Branch: `main`
-- Local branch synchronized with `origin/main`
-- Working tree: clean
-- Existing application and audit documentation committed and pushed
+- Latest application correction commit: `6ba5aff`
+- Commit message: `Use actual Ant release labels in results`
+- Application correction pushed successfully to `origin/main`
+- Working tree was clean after the application correction commit
+- This report update is pending its own commit and push
 
 ## 10. Conclusion
 
-The major automated tests, Apache Ant baseline measurements, uploaded-project analysis, issue details, reporting, CSV export, and failure-handling workflows were successfully validated.
+The major automated tests, Apache Ant baseline measurements, uploaded-project analysis, issue details, reporting, CSV exports, and failure-handling workflows were successfully validated.
 
-The results provide a documented validation baseline for ArchiSense.
+The two minor observations identified during initial validation were subsequently resolved and verified. The backend test suite also passed all 15 tests.
 
-Research-gap implementation and experimental evaluation should proceed only after the remaining observations are reviewed and this application validation report is committed.
+This report provides a documented validation baseline for ArchiSense. Research-gap implementation and experimental evaluation can proceed as a separate phase, while preserving the verified application and original AsTdEA baseline.
