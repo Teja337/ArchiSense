@@ -215,6 +215,7 @@ public class ResultsController {
         return records;
     }
 
+    
     // Preserve the original Ant baseline implementation.
     private List<Map<String, String>> getAntResults()
             throws IOException {
@@ -258,19 +259,26 @@ public class ResultsController {
                 .resolve("ant")
                 .resolve("intraVersion");
 
+        String[] versionLabels = {
+                "Ant 1.9.4",
+                "Ant 1.9.5",
+                "Ant 1.9.6"
+        };
+
         List<Map<String, String>> results = new ArrayList<>();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < versionLabels.length; i++) {
 
             Path csvFile = resultsPath
                     .resolve(String.valueOf(i))
                     .resolve("ProjectMetrics.csv");
 
-            results.add(readMetrics(csvFile, i, "Ant " + (i + 1)));
+            results.add(readMetrics(csvFile, i, versionLabels[i]));
         }
 
         return results;
     }
+
 
     // Read the latest analysis of an uploaded project.
    
