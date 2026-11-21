@@ -30,14 +30,21 @@ The current application provides:
 
 ```text
 ArchiSense/
-├── backend/                 # Spring Boot backend
-├── frontend/                # React frontend
-├── datasets/                # Prepared Java project datasets
-├── results/                 # Original AsTdEA analysis results
+├── backend/
+├── frontend/
+├── datasets/
+├── results/
 ├── original/
-│   └── AsTdEA/              # Original analysis engine
+│   └── AsTdEA/
 ├── docs/
-│   └── audit/               # Project audit documentation
+│   ├── api-reference.md
+│   ├── architecture.md
+│   ├── setup-and-installation.md
+│   └── audit/
+│       ├── application-implementation.md
+│       ├── baseline-reproduction.md
+│       ├── dataset-preparation.md
+│       └── source-code-audit.md
 ├── LocPerClassGenerator.java
 ├── measure_ant_loc.py
 ├── validate_ant_classes.ps1
@@ -112,9 +119,11 @@ The backend test, frontend lint and frontend production build have been successf
 
 The current application displays prepared AsTdEA results for Apache Ant versions 1.9.4, 1.9.5 and 1.9.6.
 
-The frontend reads existing results through the backend. The current application does not automatically execute a new AsTdEA analysis when a user opens the dashboard.
+For uploaded Maven-based Java projects, the backend performs project validation, compilation, metadata preparation and AsTdEA analysis as part of the upload workflow. Manual analysis can also be triggered through the analysis API.
 
-All displayed analysis values originate from the prepared dataset and result files.
+Opening the dashboard does not automatically start a new analysis. The frontend retrieves and displays the available analysis results through the backend.
+
+All displayed analysis values originate from AsTdEA-generated results.
 
 ## Research Status
 
